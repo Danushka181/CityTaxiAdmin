@@ -40,6 +40,18 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
+        'passengers' => [
+            'driver' => 'jwt',
+            'provider' => 'passengers',
+        ],
+        'drivers' => [
+            'driver' => 'jwt',
+            'provider' => 'drivers',
+        ],
     ],
 
     /*
@@ -64,6 +76,16 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+
+        'passengers' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Passengers::class,
+        ],
+
+        'drivers' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Drivers::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

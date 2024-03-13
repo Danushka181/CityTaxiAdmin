@@ -17,6 +17,22 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('mobile')->unique()->nullable();
+
+            $table->text('avatar')->nullable();
+            $table->string('address')->nullable();
+            $table->enum('gender', [
+                'MALE',
+                'FEMALE',
+            ])->default('MALE');
+            $table->enum('type', [
+                'USER',
+                'DRIVER',
+            ])->default('USER');
+
+            $table->mediumInteger('otp')->default(0);
+            $table->enum('blocked', ['1', '0'])->default('0');
+
             $table->rememberToken();
             $table->timestamps();
         });

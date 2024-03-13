@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RegisterMail;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -10,12 +11,17 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class RegisteredUserController extends Controller
 {
+
+
+
     /**
      * Display the registration view.
      */
@@ -27,7 +33,7 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
@@ -45,7 +51,18 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        // send email when registration.
+        $mailData = [
+            'user_name' => $request->email,
+            'name' => $request->name,
+            'password' => $request->password,
+        ];
+        Mail::to($request->email)->send(new RegisterMail($mailData));
+
+
         Auth::login($user);
+
+
 
         return redirect(RouteServiceProvider::HOME);
     }
