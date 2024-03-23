@@ -6,6 +6,7 @@ use App\Http\Controllers\Mail\MailController;
 use App\Http\Controllers\Passengers\PassengerManageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Trips\TripsManageController;
+use App\Http\Controllers\Vehicle\VehicleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('drivers', DriverManageController::class);
     Route::resource('passenger', PassengerManageController::class);
     Route::resource('trips', TripsManageController::class);
+    Route::resource('vehicle', VehicleController::class);
+
 
 
 });

@@ -125,7 +125,9 @@ const isActive = (route) => {
                         </li>
 
                         <li>
-                            <a href="/tables"
+                            <Link
+                                :class="{ 'active': isActive('/vehicle') }"
+                                :href="route('vehicle.index')"
                                class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4">
                               <span>
                                 <svg class="fill-current" width="18" height="19" viewBox="0 0 18 19" fill="none"
@@ -142,7 +144,7 @@ const isActive = (route) => {
                                   </defs>
                                 </svg>
                               </span> Manage Vehicles
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a aria-current="page" href="/profile#"

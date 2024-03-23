@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('driver_availabilities', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('driver_id')->constrained();
-            $table->boolean('is_active')->default(false);
-            $table->timestamps();
+        Schema::table('ratings', function (Blueprint $table) {
+            $table->foreignId('trip_id')->constrained('trips');
         });
     }
 
@@ -24,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('driver_availabilities');
+        Schema::table('ratings', function (Blueprint $table) {
+            $table->dropForeign(['trip_id']);
+            $table->dropColumn('trip_id');
+        });
     }
 };

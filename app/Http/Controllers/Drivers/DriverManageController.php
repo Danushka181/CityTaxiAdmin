@@ -94,7 +94,15 @@ class DriverManageController extends Controller
         $driver->is_banned  = $request->is_banned;
         $driver->status     = $request->status;
 
+
         $driver->save();
+
+        $availableDriver = new AvailableDrivers();
+        if ( $driver->status == 'ACTIVE' && $driver->is_banned == 0) {
+            $availableDriver::addAvailableDriver($id);
+        }else{
+            $availableDriver::removeAvailableDriver($id);
+        }
 
         return back()->with('success', 'Driver updated successfully.');
 
@@ -113,6 +121,6 @@ class DriverManageController extends Controller
 
     private function getDriverDataById( $id )
     {
-        return Drivers::find($id)->firstOrFail();
+        return Drivers::find($id);
     }
 }

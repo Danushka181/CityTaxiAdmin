@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Trips;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Drivers\AvailableDrivers;
+use App\Models\DriversAvailability;
 use App\Models\Trips;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -33,7 +35,10 @@ class TripsManageController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Trips/Create');
+        return Inertia::render('Trips/Create', [
+            'drivers' => DriversAvailability::with('driver')->get()
+        ]);
+
     }
 
     /**

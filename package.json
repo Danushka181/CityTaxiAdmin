@@ -19,6 +19,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@mapbox/mapbox-gl-directions": "^4.3.0",
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.3",
         "flowbite": "^2.2.1",

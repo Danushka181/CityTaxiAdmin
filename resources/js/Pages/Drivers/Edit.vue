@@ -141,15 +141,17 @@ const sumitEditDriver = (e) => {
                                     <div class="actions gap-3 flex">
                                         <button type="submit" class="btn btn-primary bg-black" @click="enableFormEdit">Edit Form</button>
                                         <button type="submit" class="btn btn-primary bg-green-700" :disabled="!editForm" >Save Form</button>
-                                        <Transition
-                                            enter-active-class="transition ease-in-out"
-                                            enter-from-class="opacity-0"
-                                            leave-active-class="transition ease-in-out"
-                                            leave-to-class="opacity-0 text-green-600"
-                                        >
-                                            <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">{{$page.props.flash.success}}</p>
-                                        </Transition>
                                     </div>
+                                </div>
+                                <div class="div col-12 mt-3">
+                                    <Transition
+                                        enter-active-class="transition ease-in-out "
+                                        enter-from-class="opacity-0"
+                                        leave-active-class="transition ease-in-out"
+                                        leave-to-class="opacity-0 text-green-600"
+                                    >
+                                        <p v-if="form.recentlySuccessful" class="alert alert-success text-sm text-gray-600">{{$page.props.flash.success}}</p>
+                                    </Transition>
                                 </div>
                             </div>
                         </form>
