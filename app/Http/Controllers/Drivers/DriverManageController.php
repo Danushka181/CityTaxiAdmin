@@ -10,6 +10,11 @@ use Inertia\Inertia;
 
 class DriverManageController extends Controller
 {
+    public static function getTotalDrivers()
+    {
+        return Drivers::count();
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -62,7 +67,7 @@ class DriverManageController extends Controller
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:drivers,email,'.$id,
-            'phone' => 'required|numeric|digits:10|unique:drivers,phone,'.$id,
+            'phone' => 'required|numeric|unique:drivers,phone,'.$id,
             'address' => 'required|string|max:255',
             'identity_card' => 'required|string|max:255',
             'license_number' => 'required|string|max:18',

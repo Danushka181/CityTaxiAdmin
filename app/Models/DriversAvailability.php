@@ -11,11 +11,11 @@ class DriversAvailability extends Model
 
     protected $guarded = [];
 
-    protected $table = 'drivers_availability';
+    protected $table = 'driver_availabilities';
 
     public function driver()
     {
-        return $this->belongsTo(Drivers::class);
+        return $this->belongsTo(Drivers::class, 'driver_id', 'id');
     }
 
     public function vehicle()

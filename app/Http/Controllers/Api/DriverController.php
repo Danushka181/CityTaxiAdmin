@@ -22,24 +22,32 @@ class DriverController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.Drivers::class,
-            'phone' => 'required|numeric|digits:10|unique:'.Drivers::class,
+            'phone' => 'required|numeric|unique:'.Drivers::class,
             'password' => ['required'],
             'address' => 'required|string|max:255',
             'identity_card' => 'required|string|max:255',
             'license_number' => 'required|string|max:18',
             'hire_rate' => 'required|numeric',
-
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 403);
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()->toArray(),
+            ], 403);
         }
+
+
 
         $driver = Drivers::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
+            'address' => $request->address,
+            'identity_card' => $request->identity_card,
+            'license_number' => $request->license_number,
+            'hire_rate' => $request->hire_rate
         ]);
 
         event(new Registered($driver));
@@ -69,7 +77,10 @@ class DriverController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 403);
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()->toArray(),
+            ], 403);
         }
 
         $credentials = request(['phone', 'password']);
@@ -78,7 +89,10 @@ class DriverController extends Controller
             return $this->respondWithToken($token);
         }
 
-        return response()->json(['errors' => 'Invalid Login Details Please check!'], 403);
+        return response()->json([
+            'success' => false,
+            'errors' => ['login'=>['Invalid Login Details Please check!']],
+        ], 403);
     }
 
 

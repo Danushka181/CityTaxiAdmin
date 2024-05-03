@@ -9,6 +9,11 @@ use Inertia\Inertia;
 
 class VehicleController extends Controller
 {
+    public static function getTotalVehicles()
+    {
+        return Vehicles::count();
+    }
+
     /**
      * Display a listing of the resource.
      */

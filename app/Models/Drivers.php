@@ -32,7 +32,14 @@ class Drivers extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone'
+        'name',
+        'email',
+        'password',
+        'phone',
+        'address',
+        'identity_card',
+        'license_number',
+        'hire_rate',
     ];
 
     /**

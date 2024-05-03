@@ -10,6 +10,11 @@ use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class PassengerManageController extends Controller
 {
+    public static function getTotalPassengers()
+    {
+        return Passengers::count();
+    }
+
     /**
      * Display a listing of the resource.
      */

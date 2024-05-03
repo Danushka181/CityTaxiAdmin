@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['api'])->prefix('auth')->group(function () {
     Route::post('register/otp', [OtpController::class, 'loginWithOTP']);
     Route::post('register/otp-verify', [OtpController::class, 'verifyWithOTP']);
+    Route::post('register/otp-resend', [OtpController::class, 'resendOTP']);
 });
 
 Route::middleware(['api','otp.setup'])->prefix('driver')->group(function () {

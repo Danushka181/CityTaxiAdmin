@@ -5,12 +5,33 @@ namespace App\Http\Controllers\Trips;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Drivers\AvailableDrivers;
 use App\Models\DriversAvailability;
+use App\Models\Payments;
 use App\Models\Trips;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TripsManageController extends Controller
 {
+    public static function getTotalTripsThisMonth()
+    {
+        return Trips::whereMonth('created_at', date('m'))->count();
+    }
+
+    public static function getTotalTripsToday()
+    {
+        return Trips::whereDate('created_at', date('Y-m-d'))->count();
+    }
+
+    public static function getTotalRevenue()
+    {
+        return Payments::where('payment_status', 'completed')->sum('payment_amount');
+    }
+
+    public static function getTotalTrips()
+    {
+        return Trips::count();
+    }
+
     /**
      * Display a listing of the resource.
      */

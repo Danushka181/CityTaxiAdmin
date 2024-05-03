@@ -21,23 +21,23 @@ class OtpMiddleware
         if (!$token) {
             return response()->json([
                 'success' => false,
-                'error' => ['Token not provided']
-            ], 405);
+                'errors' => ['token' => ['Token not provided']]
+            ], 403);
         }
 
         $OtpRow = OtpValidation::where('token', $token)->first();
         if (!$OtpRow) {
             return response()->json([
                 'success' => false,
-                'error' => ['Invalid token']
-            ], 405);
+                'errors' => ['token' => ['Invalid token']]
+            ], 403);
         }
 
         if (!$OtpRow->state) {
             return response()->json([
                 'success' => false,
-                'error' => ['OTP is not verified']
-            ], 405);
+                'errors' => ['token' => ['OTP is not verified']]
+            ], 403);
         }
 
         return $next($request);

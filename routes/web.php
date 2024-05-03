@@ -32,7 +32,23 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $totalDrivers = DriverManageController::getTotalDrivers();
+    $totalPassengers = PassengerManageController::getTotalPassengers();
+    $totalTrips = TripsManageController::getTotalTrips();
+    $totalVehicles = VehicleController::getTotalVehicles();
+    $totalRevenue = TripsManageController::getTotalRevenue();
+    $totalTripsToday = TripsManageController::getTotalTripsToday();
+    $totalTripsThisMonth = TripsManageController::getTotalTripsThisMonth();
+
+    return Inertia::render('Dashboard', [
+        'totalDrivers' => $totalDrivers,
+        'totalPassengers' => $totalPassengers,
+        'totalTrips' => $totalTrips,
+        'totalVehicles' => $totalVehicles,
+        'totalRevenue' => $totalRevenue,
+        'totalTripsToday' => $totalTripsToday,
+        'totalTripsThisMonth' => $totalTripsThisMonth,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

@@ -17,7 +17,7 @@ class Passengers extends Authenticatable implements JWTSubject
      *
      * @var string
      */
-    protected $guard = 'passengers';
+    protected $guard = [];
 
     /**
      * The database table used by the model.
